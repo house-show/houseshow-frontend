@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React from 'react'
 import { createSlice } from '@reduxjs/toolkit'
 
@@ -41,8 +40,6 @@ const choresSlice = createSlice({
       const val = action.payload
       state.currentIndex = val
       state.currentIndexRef.current = val
-      console.log('updateCurrentIndex action:', action) // no console
-      console.log('Updated state:', state) // no console
     },
     swiped: (state, action) => {
       const { direction, nameToDelete, index } = action.payload
@@ -75,8 +72,6 @@ const choresSlice = createSlice({
       if (canSwipe && state.currentIndex < state.db.length) {
         await state.childRefs[state.currentIndex].current.swipe(dir)
       }
-      console.log('swipe action:', action) // no console
-      console.log('Updated state:', state) // no console
     },
     goBack: (state) => {
       const canGoBack = state.currentIndex < state.db.length - 1
@@ -98,7 +93,7 @@ const choresSlice = createSlice({
     },
     removeAllApprovedChores: (state) => {
       state.approvedChores = []
-      localStorage.removeItem('approvedChores') // Remove from local storage as well
+      localStorage.removeItem('approvedChores')
     }
   }
 })

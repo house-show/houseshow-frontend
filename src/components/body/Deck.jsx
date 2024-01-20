@@ -1,9 +1,8 @@
 import React, { useMemo, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import TinderCard from 'react-tinder-card'
-import Card from './Card'
+import './card.css'
 import {
-  swipe,
   goBack,
   swiped,
   outOfFrame,
