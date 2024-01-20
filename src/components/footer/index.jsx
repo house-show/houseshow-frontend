@@ -3,13 +3,7 @@ import './style.css'
 
 export default function Footer() {
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between'
-      }}
-    >
+    <div className='footer'>
       <div>footer</div>
       footer stuff
       <div>footer</div>
