@@ -16,6 +16,7 @@ export default function Deck() {
 
   const canSwipe = currentIndex >= 0 && currentIndex < db.length
   const canGoBack = currentIndex < db.length - 1
+  const disabledButtonColor = '#c3c4d3'
 
   const childRefs = useMemo(
     () =>
@@ -71,21 +72,21 @@ export default function Deck() {
       <div className='buttons'>
         <button
           type='button'
-          style={{ backgroundColor: !canSwipe && '#c3c4d3' }}
+          style={{ backgroundColor: !canSwipe && disabledButtonColor }}
           onClick={() => handleSwipe('left')}
         >
           Swipe left!
         </button>
         <button
           type='button'
-          style={{ backgroundColor: !canGoBack && '#c3c4d3' }}
+          style={{ backgroundColor: !canGoBack && disabledButtonColor }}
           onClick={handleGoBack}
         >
           Undo swipe!
         </button>
         <button
           type='button'
-          style={{ backgroundColor: !canSwipe && '#c3c4d3' }}
+          style={{ backgroundColor: !canSwipe && disabledButtonColor }}
           onClick={() => handleSwipe('right')}
         >
           Swipe right!
@@ -94,21 +95,15 @@ export default function Deck() {
       {lastDirection ? (
         <div>
           <div className='approvedContainer'>
-            <h2 className='infoText'>Your Approved Chores:</h2>
+            <h4 className='choresText'>Your Approved Chores:</h4>
+            <h6 className='choresText'>will be removed later</h6>
             <ul className='approvedChores'>
               {approvedChores.map((chore) => (
                 <li key={`${chore.name}-${chore.name}`}>{chore.name}</li>
               ))}
             </ul>
-            <button
-              style={{
-                height: '2rem',
-                width: '8rem',
-                fontSize: '.75rem'
-              }}
-              type='button'
-              onClick={handleRemoveAllApprovedChores}
-            >
+
+            <button className='buttonRemove' type='button' onClick={handleRemoveAllApprovedChores}>
               Remove All Approved Chores
             </button>
           </div>

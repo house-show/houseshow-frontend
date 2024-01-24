@@ -44,18 +44,21 @@ const choresSlice = createSlice({
     swiped: (state, action) => {
       const { direction, nameToDelete, index } = action.payload
 
-      // Update lastDirection and currentIndex
-      state.lastDirection = direction
-      state.currentIndex = index - 1
+      const newState = {
+        ...state,
+        lastDirection: direction,
+        currentIndex: index - 1,
+        approvedChores: [...state.approvedChores]
+      }
 
-      // If swiped right (approved), add the chore to approvedChores
       if (direction === 'right' && index >= 0 && index < state.db.length) {
         const approvedChore = state.db[index]
-        state.approvedChores.push(approvedChore)
+        newState.approvedChores.push(approvedChore)
 
-        // Update local storage with the updated approvedChores
-        localStorage.setItem('approvedChores', JSON.stringify(state.approvedChores))
+        localStorage.setItem('approvedChores', JSON.stringify(newState.approvedChores))
       }
+
+      return newState
     },
 
     outOfFrame: (state, action) => {
@@ -89,11 +92,20 @@ const choresSlice = createSlice({
       }
     },
     updateApprovedChores: (state, action) => {
-      state.approvedChores = action.payload
+      const newState = { ...state }
+
+      newState.approvedChores = action.payload
+
+      return newState
     },
     removeAllApprovedChores: (state) => {
-      state.approvedChores = []
+      const newState = { ...state }
+
+      newState.approvedChores = []
+
       localStorage.removeItem('approvedChores')
+
+      return newState
     }
   }
 })
