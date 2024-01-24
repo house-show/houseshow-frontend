@@ -1,0 +1,6 @@
+.body {
+  display: flex;
+  height: 83vh;
+  width: 100vw;
+  overflow: auto;
+}
