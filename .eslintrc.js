@@ -81,7 +81,7 @@ module.exports = {
       }
     ],
     'max-len': ['off', { code: 100, ignoreComments: true }],
-    'no-console': ['error', { allow: ['warn', 'error'] }],
+    'no-console': ['warn', { allow: ['warn', 'error'] }],
     'no-nested-ternary': 'error',
     'no-else-return': 'error',
     'react/react-in-jsx-scope': 'off',

@@ -7,8 +7,9 @@
   overflow: hidden;
 }
 
+/* position was absolute, changed to fixed due to overflow problems */
 .swipe {
-  position: absolute;
+  position: fixed;
 }
 
 .cardContainer {
