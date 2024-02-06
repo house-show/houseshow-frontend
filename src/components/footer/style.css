@@ -3,8 +3,19 @@
   flex-direction: row;
   bottom: 0rem;
   height: 10vh;
-  width: 100vw;
-  box-shadow: 1rem solid black;
-  justify-content: center;
+  width: calc(100vw - 2rem);
+  justify-content: space-between;
+  padding: 0 1rem;
+  border-top: 0.5px solid black;
   align-items: center;
+}
+
+.footer-buttons {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.8rem;
+  width: 3rem;
+  align-items: center;
+  text-decoration: none;
+  color: gray;
 }

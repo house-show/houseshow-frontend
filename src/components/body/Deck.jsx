@@ -1,18 +1,12 @@
 import React, { useMemo, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import TinderCard from 'react-tinder-card'
-import './card.css'
-import {
-  goBack,
-  swiped,
-  outOfFrame,
-  updateApprovedChores,
-  removeAllApprovedChores
-} from '../../features/chores/choresSlice'
+import './style.css'
+import { goBack, swiped, outOfFrame, updateApprovedChores } from '../../features/chores/choresSlice'
 
 export default function Deck() {
   const dispatch = useDispatch()
-  const { db, currentIndex, lastDirection, approvedChores } = useSelector((state) => state.chores)
+  const { db, currentIndex, lastDirection } = useSelector((state) => state.chores)
 
   const canSwipe = currentIndex >= 0 && currentIndex < db.length
   const canGoBack = currentIndex < db.length - 1
@@ -38,10 +32,6 @@ export default function Deck() {
       await childRefs[newIndex].current.restoreCard()
       dispatch(goBack())
     }
-  }
-
-  const handleRemoveAllApprovedChores = () => {
-    dispatch(removeAllApprovedChores())
   }
 
   useEffect(() => {
@@ -92,25 +82,7 @@ export default function Deck() {
           Swipe right!
         </button>
       </div>
-      {lastDirection ? (
-        <div>
-          <div className='approvedContainer'>
-            <h4 className='choresText'>Your Approved Chores:</h4>
-            <h6 className='choresText'>will be removed later</h6>
-            <ul className='approvedChores'>
-              {approvedChores.map((chore) => (
-                <li key={`${chore.name}-${chore.name}`}>{chore.name}</li>
-              ))}
-            </ul>
-
-            <button className='buttonRemove' type='button' onClick={handleRemoveAllApprovedChores}>
-              Remove All Approved Chores
-            </button>
-          </div>
-        </div>
-      ) : (
-        <h2 className='infoText'>Swipe a card to get your Chores!</h2>
-      )}
+      {lastDirection ? <div /> : <h2 className='infoText'>Swipe a card to get your Chores!</h2>}
     </div>
   )
 }

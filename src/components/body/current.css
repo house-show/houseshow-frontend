@@ -1,0 +1,66 @@
+.approvedContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 95vw;
+  height: 40rem;
+  max-height: 90%;
+}
+.approvedChores {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: auto;
+  height: 90%;
+}
+
+.approvedChoresCard {
+  border-radius: 1rem;
+  margin-top: 0.5rem;
+  width: 95%;
+  background: linear-gradient(90deg, rgba(236, 236, 236, 1) 0%, rgb(250, 230, 200) 100%);
+  box-shadow: 3px 3px 3px darkgray;
+}
+
+.approvedChoresCardContents {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.approvedChoresCardContentsCred {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.choresText {
+  width: 60vw;
+  justify-content: center;
+  display: flex;
+  color: #c6c6c6;
+  height: 1rem;
+  margin: 0.5rem;
+  animation-name: popup;
+  animation-duration: 800ms;
+}
+.buttonRemove {
+  display: flex;
+  border-radius: 1rem;
+  border: none;
+  color: #fff;
+  font-size: 14px;
+  background-color: #da3737;
+  transition: 200ms;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  margin-top: 0.5rem;
+  font-weight: bolder;
+  width: 15rem;
+  height: 2rem;
+  box-shadow: 3px 3px 3px darkgray;
+}

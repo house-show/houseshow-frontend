@@ -1,6 +1,137 @@
 .body {
   display: flex;
+  justify-content: center;
   height: 83vh;
   width: 100vw;
   max-width: 100%;
+}
+.welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 83vh;
+  width: 100vw;
+  max-width: 100%;
+  overflow: auto;
+}
+
+.loginContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  height: 40vh;
+}
+
+.deck {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 100vw;
+  overflow: hidden;
+}
+
+/* position was absolute, changed to fixed due to overflow problems */
+.swipe {
+  position: fixed;
+}
+
+.cardContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  max-width: 20rem;
+  height: 25rem;
+}
+
+.card {
+  position: relative;
+  background-color: #fff;
+  width: 80vw;
+  max-width: 260px;
+  height: 25rem;
+  box-shadow: 0px 0px 50px 0px rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  background-size: cover;
+  background-position: center;
+}
+
+.swipe:last-of-type {
+}
+
+.card h3 {
+  position: absolute;
+  bottom: 0;
+  margin: 10px;
+  color: #fff;
+}
+
+.infoText {
+  width: 60vw;
+  justify-content: center;
+  display: flex;
+  color: #fff;
+  animation-name: popup;
+  animation-duration: 800ms;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  margin-top: 1rem;
+  width: 60vw;
+  justify-content: center;
+}
+
+@media (max-width: 625px) {
+  .buttons {
+    flex-direction: row;
+  }
+}
+
+.buttons button {
+  flex-shrink: 0;
+  padding: 5px;
+  border-radius: 10px;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  background-color: #9198e5;
+  transition: 200ms;
+  margin: 10px;
+  font-weight: bolder;
+  width: 80px;
+  height: 50px;
+  box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.1);
+}
+
+.buttons button:hover {
+  transform: scale(1.05);
+}
+
+/* text animation*/
+@keyframes popup {
+  0% {
+    transform: scale(1, 1);
+  }
+  10% {
+    transform: scale(1.1, 1.1);
+  }
+  30% {
+    transform: scale(0.9, 0.9);
+  }
+  50% {
+    transform: scale(1, 1);
+  }
+  57% {
+    transform: scale(1, 1);
+  }
+  64% {
+    transform: scale(1, 1);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
 }

@@ -4,23 +4,41 @@ import { Route, Routes } from 'react-router-dom'
 import Deck from './Deck'
 import './style.css'
 import Login from './Login'
+import Welcome from './Welcome'
+import Current from './Current'
 
 export default function Body() {
   return (
     <Routes>
       <Route
-        path='/login'
+        path='/'
         element={
           <div className='body'>
-            <Login />
+            <Welcome />
           </div>
         }
       />
       <Route
-        path='/'
+        path='/deck'
         element={
           <div className='body'>
             <Deck />
+          </div>
+        }
+      />
+      <Route
+        path='/current'
+        element={
+          <div className='body'>
+            <Current />
+          </div>
+        }
+      />
+      <Route
+        path='/login'
+        element={
+          <div className='body'>
+            <Login />
           </div>
         }
       />
