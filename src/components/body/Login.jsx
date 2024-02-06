@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Button, Card, Input, message } from 'antd'
 import { useDispatch, useSelector } from 'react-redux'
 import { signinUser } from '../../features/auth/authApi'
-import { selectCurrentToken, logOut } from '../../features/auth/authSlice'
+import { selectCurrentToken, logOut, setCredentials } from '../../features/auth/authSlice'
 import Mascot from '../../assets/templateMascot.png'
 
 export default function Login() {
@@ -12,39 +12,27 @@ export default function Login() {
   const [accessTokenString, setAccessTokenString] = useState(null)
   const token = useSelector(selectCurrentToken)
 
-  const getUsernameFromEmail = (email) =>
-    // Extracting username from email (assuming email is in the format username@domain.com)
-    email.split('@')[0]
+  const getUsernameFromEmail = (email) => email.split('@')[0]
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token')
     if (storedToken) {
-      // If token is stored, you can customize your greeting message here
-      const user = getUsernameFromEmail(username)
-      message.info(`Hello, ${user}! You are already logged in.`)
+      dispatch(setCredentials({ user: getUsernameFromEmail(username), accessToken: storedToken }))
     }
-  }, []) // Empty dependency array ensures the effect runs only once when component mounts
+  }, [])
 
   const handleSignIn = async () => {
     try {
       const userData = { email: username, password }
-      const response = await dispatch(signinUser(userData)).unwrap()
-
-      const token = response?.token?.access_token.toString()
-
-      if (token) {
-        setAccessTokenString(`${token.slice(-20)}`)
-        message.success('Succesfully Login')
-      } else {
-        message.error('Access token not found in the response.')
-      }
+      await dispatch(signinUser(userData))
+      message.success('Successfully Logged In')
     } catch (error) {
       message.error('Sign-in failed. Please try again.')
     }
   }
 
   const handleSignOut = () => {
-    dispatch(logOut()) // Dispatch the logOut action to reset authentication state
+    dispatch(logOut())
     message.success('Successfully Logged Out')
   }
 
@@ -53,7 +41,6 @@ export default function Login() {
       <img style={{ height: '10rem' }} src={Mascot} alt='House Show Mascot' />
       <Card hoverable style={{ width: 300 }}>
         {token ? (
-          // If token exists in local storage
           <>
             <h2>Hello, {getUsernameFromEmail(username)}!</h2>
             <Button type='primary' onClick={handleSignOut}>
@@ -61,7 +48,6 @@ export default function Login() {
             </Button>
           </>
         ) : (
-          // If token does not exist in local storage
           <>
             <Input
               placeholder='Username'
