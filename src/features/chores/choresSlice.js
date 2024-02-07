@@ -98,6 +98,13 @@ const choresSlice = createSlice({
 
       return newState
     },
+    removeChore: (state, action) => {
+      const choreIndexToRemove = action.payload
+
+      state.approvedChores = state.approvedChores.filter((_, index) => index !== choreIndexToRemove)
+
+      localStorage.setItem('approvedChores', JSON.stringify(state.approvedChores))
+    },
     removeAllApprovedChores: (state) => {
       const newState = { ...state }
 
@@ -117,6 +124,7 @@ export const {
   swipe,
   goBack,
   updateApprovedChores,
+  removeChore,
   removeAllApprovedChores
 } = choresSlice.actions
 

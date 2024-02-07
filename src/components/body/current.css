@@ -64,3 +64,17 @@
   height: 2rem;
   box-shadow: 3px 3px 3px darkgray;
 }
+
+.selected {
+  width: 85%;
+}
+
+.selected .ant-btn {
+  display: block;
+}
+
+.additionalButton {
+  position: absolute;
+  right: -6rem;
+  top: 2rem;
+}

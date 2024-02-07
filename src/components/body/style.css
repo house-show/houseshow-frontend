@@ -15,15 +15,6 @@
   overflow: auto;
 }
 
-.loginContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: 2rem;
-  height: 40vh;
-}
-
 .deck {
   display: flex;
   flex-direction: column;
