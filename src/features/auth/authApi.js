@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
+import { message } from 'antd'
 import { setCredentials } from './authSlice'
 
 const API_URL = {
@@ -18,30 +19,38 @@ export const signupUser = createAsyncThunk('auth/signup', async (userData) => {
   return data
 })
 
-export const signinUser = createAsyncThunk('auth/signin', async (userData, { dispatch }) => {
-  const response = await fetch(API_URL.SIGNIN, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(userData)
-  })
+export const signinUser = createAsyncThunk(
+  'auth/signin',
+  async ({ email, password }, { dispatch }) => {
+    try {
+      const response = await fetch(API_URL.SIGNIN, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password })
+      })
 
-  if (!response.ok) {
-    // Handle non-2xx status codes
-    throw new Error('Sign-in failed. Please try again.')
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.message || 'Sign-in failed. Please try again.')
+      }
+
+      const data = await response.json()
+      const token = data?.token?.access_token.toString()
+
+      if (token) {
+        dispatch(setCredentials({ user: email, accessToken: token }))
+        message.success('Welcome Back!')
+        return data
+      }
+      throw new Error('Access token not found in the response.')
+    } catch (error) {
+      message.error(error.message || 'Sign-in failed. Please try again.')
+      throw error
+    }
   }
-
-  const data = await response.json()
-  const token = data?.token?.access_token.toString()
-
-  if (token) {
-    dispatch(setCredentials({ user: userData.email, accessToken: token }))
-    return data
-  }
-
-  throw new Error('Access token not found in the response.')
-})
+)
 
 // SIGNUP: 'https://house-show-api-58791b32d5a5.herokuapp.com/auth/signup',
 // SIGNIN: 'https://house-show-api-58791b32d5a5.herokuapp.com/auth/signin'

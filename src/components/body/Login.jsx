@@ -23,14 +23,9 @@ export default function Login() {
     }
   }, [])
 
-  const handleSignIn = async () => {
-    try {
-      const userData = { email: username, password }
-      await dispatch(signinUser(userData))
-      message.success('Successfully Logged In')
-    } catch (error) {
-      message.error('Sign-in failed. Please try again.')
-    }
+  const handleSignIn = () => {
+    const userData = { email: username, password }
+    dispatch(signinUser(userData))
   }
 
   const handleSignOut = () => {

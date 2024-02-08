@@ -17,7 +17,7 @@
   display: flex;
   height: 2rem;
   font-size: 1.5rem;
-  align-items: end;
+  align-items: flex-end;
   overflow: hidden;
   color: gray;
   cursor: pointer;
@@ -30,4 +30,3 @@
 .logo:hover {
   color: #faf4ca;
 }
-
