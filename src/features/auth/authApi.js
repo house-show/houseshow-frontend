@@ -7,17 +7,33 @@ const API_URL = {
   SIGNIN: 'http://localhost:3005/auth/signin'
 }
 
-export const signupUser = createAsyncThunk('auth/signup', async (userData) => {
-  const response = await fetch(API_URL.SIGNUP, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(userData)
-  })
-  const data = await response.json()
-  return data
-})
+export const signupUser = createAsyncThunk(
+  'auth/signup',
+  async ({ email, password }, { dispatch }) => {
+    try {
+      const response = await fetch(API_URL.SIGNUP, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password })
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.message || 'Sign-up failed. Please try again.')
+      }
+
+      const data = await response.json()
+      dispatch(setCredentials({ user: email, accessToken: null }))
+      message.success('Sign-up Successful! Welcome to House Show!')
+      return data
+    } catch (error) {
+      message.error(error.message || 'Sign-up failed. Please try again.')
+      throw error
+    }
+  }
+)
 
 export const signinUser = createAsyncThunk(
   'auth/signin',

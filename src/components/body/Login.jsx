@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Card, Input, message } from 'antd'
 import { useDispatch, useSelector } from 'react-redux'
-import { signinUser } from '../../features/auth/authApi'
+import { signinUser, signupUser } from '../../features/auth/authApi'
 import { selectCurrentToken, logOut, setCredentials } from '../../features/auth/authSlice'
 import Mascot from '../../assets/templateMascot.png'
 import './login.css'
@@ -26,6 +26,11 @@ export default function Login() {
   const handleSignIn = () => {
     const userData = { email: username, password }
     dispatch(signinUser(userData))
+  }
+
+  const handleSignUp = () => {
+    const userData = { email: username, password }
+    dispatch(signupUser(userData))
   }
 
   const handleSignOut = () => {
@@ -79,6 +84,9 @@ export default function Login() {
             />
             <Button type='primary' onClick={handleSignIn}>
               Sign In
+            </Button>
+            <Button type='primary' onClick={handleSignUp}>
+              Sign Up
             </Button>
           </>
         )}
