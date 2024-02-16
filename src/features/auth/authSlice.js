@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const authSlice = createSlice({
   name: 'auth',
-  initialState: { user: null, token: null, loading: false },
+  initialState: { user: null, token: null, isExpired: null, loading: false },
   reducers: {
     setCredentials: (state, action) => {
       const { user, accessToken } = action.payload
@@ -14,13 +14,26 @@ const authSlice = createSlice({
       state.user = null
       state.token = null
       localStorage.removeItem('token')
+    },
+    setExpirationStatus: (state, action) => {
+      const { exp, iat } = action.payload
+      const now = Date.now()
+      const expirationTime = iat * 1000 + (exp - iat) * 1000
+
+      const remainingTime = expirationTime - now
+      const remainingSeconds = Math.floor(remainingTime / 1000)
+
+      state.isExpired = now >= expirationTime
+      console.log('Token expiration status:', state.isExpired)
+      console.log('Remaining time until expiration (seconds):', remainingSeconds)
     }
   }
 })
 
-export const { setCredentials, logOut } = authSlice.actions
+export const { setCredentials, logOut, setExpirationStatus } = authSlice.actions
 
 export default authSlice.reducer
 
 export const selectCurrentUser = (state) => state.auth.user
 export const selectCurrentToken = (state) => state.auth.token
+export const selectExpirationStatus = (state) => state.auth.isExpired

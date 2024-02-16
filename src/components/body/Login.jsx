@@ -2,7 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { Button, Card, Input, message } from 'antd'
 import { useDispatch, useSelector } from 'react-redux'
 import { signinUser, signupUser } from '../../features/auth/authApi'
-import { selectCurrentToken, logOut, setCredentials } from '../../features/auth/authSlice'
+import {
+  selectCurrentToken,
+  selectExpirationStatus,
+  setExpirationStatus,
+  logOut,
+  setCredentials
+} from '../../features/auth/authSlice'
 import Mascot from '../../assets/templateMascot.png'
 import './login.css'
 
@@ -13,12 +19,21 @@ export default function Login() {
   const [isInputClicked, setInputClicked] = useState(false)
   const [isPasswordClicked, setPasswordClicked] = useState(false)
   const token = useSelector(selectCurrentToken)
+  const isExpired = useSelector(selectExpirationStatus)
 
   const getUsernameFromEmail = (email) => email.split('@')[0]
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token')
     if (storedToken) {
+      // Extract and decode the token payload
+      const tokenPayloadBase64 = storedToken.split('.')[1]
+      const tokenPayload = atob(tokenPayloadBase64)
+      const tokenPayloadObject = JSON.parse(tokenPayload)
+
+      // Dispatch action to set expiration status
+      dispatch(setExpirationStatus({ exp: tokenPayloadObject.exp, iat: tokenPayloadObject.iat }))
+
       dispatch(setCredentials({ user: getUsernameFromEmail(username), accessToken: storedToken }))
     }
   }, [])
@@ -60,6 +75,7 @@ export default function Login() {
         {token ? (
           <>
             <h2>Hello, {getUsernameFromEmail(username)}!</h2>
+            <p>Token is {isExpired ? 'expired' : 'not expired'}</p>
             <Button type='primary' onClick={handleSignOut}>
               Sign Out
             </Button>
