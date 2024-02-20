@@ -126,3 +126,7 @@
     transform: scale(1, 1);
   }
 }
+
+.buttons .currentButton {
+  width: 180px;
+}

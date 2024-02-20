@@ -7,11 +7,22 @@ const API_URL = {
   SIGNIN: 'http://localhost:3005/auth/signin'
 }
 
+const fetchInterceptor = (url, options = {}) => {
+  const accessToken = localStorage.getItem('accessToken')
+  const headers = { ...options.headers }
+
+  if (accessToken) {
+    headers.Authorization = `Bearer ${accessToken}`
+  }
+
+  return fetch(url, { ...options, headers })
+}
+
 export const signupUser = createAsyncThunk(
   'auth/signup',
   async ({ email, password }, { dispatch }) => {
     try {
-      const response = await fetch(API_URL.SIGNUP, {
+      const response = await fetchInterceptor(API_URL.SIGNUP, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -39,7 +50,7 @@ export const signinUser = createAsyncThunk(
   'auth/signin',
   async ({ email, password }, { dispatch }) => {
     try {
-      const response = await fetch(API_URL.SIGNIN, {
+      const response = await fetchInterceptor(API_URL.SIGNIN, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -53,10 +64,11 @@ export const signinUser = createAsyncThunk(
       }
 
       const data = await response.json()
-      const token = data?.token?.access_token.toString()
+      const token = data?.token?.access_token
 
       if (token) {
         dispatch(setCredentials({ user: email, accessToken: token }))
+        localStorage.setItem('accessToken', token)
         message.success('Welcome Back!')
         return data
       }
@@ -67,6 +79,3 @@ export const signinUser = createAsyncThunk(
     }
   }
 )
-
-// SIGNUP: 'https://house-show-api-58791b32d5a5.herokuapp.com/auth/signup',
-// SIGNIN: 'https://house-show-api-58791b32d5a5.herokuapp.com/auth/signin'

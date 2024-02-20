@@ -24,7 +24,9 @@ const authSlice = createSlice({
       const remainingSeconds = Math.floor(remainingTime / 1000)
 
       state.isExpired = now >= expirationTime
+      // eslint-disable-next-line no-console
       console.log('Token expiration status:', state.isExpired)
+      // eslint-disable-next-line no-console
       console.log('Remaining time until expiration (seconds):', remainingSeconds)
     }
   }

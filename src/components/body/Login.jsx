@@ -26,12 +26,10 @@ export default function Login() {
   useEffect(() => {
     const storedToken = localStorage.getItem('token')
     if (storedToken) {
-      // Extract and decode the token payload
       const tokenPayloadBase64 = storedToken.split('.')[1]
       const tokenPayload = atob(tokenPayloadBase64)
       const tokenPayloadObject = JSON.parse(tokenPayload)
 
-      // Dispatch action to set expiration status
       dispatch(setExpirationStatus({ exp: tokenPayloadObject.exp, iat: tokenPayloadObject.iat }))
 
       dispatch(setCredentials({ user: getUsernameFromEmail(username), accessToken: storedToken }))

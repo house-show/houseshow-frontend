@@ -2,6 +2,7 @@ import React, { useMemo, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import TinderCard from 'react-tinder-card'
 import './style.css'
+import { Link } from 'react-router-dom'
 import { goBack, swiped, outOfFrame, updateApprovedChores } from '../../features/chores/choresSlice'
 
 export default function Deck() {
@@ -11,6 +12,7 @@ export default function Deck() {
   const canSwipe = currentIndex >= 0 && currentIndex < db.length
   const canGoBack = currentIndex < db.length - 1
   const disabledButtonColor = '#c3c4d3'
+  const btColor = '#a9a9a9'
 
   const childRefs = useMemo(
     () =>
@@ -83,6 +85,17 @@ export default function Deck() {
         </button>
       </div>
       {lastDirection ? <div /> : <h2 className='infoText'>Swipe a card to get your Chores!</h2>}
+      <div className='buttons'>
+        <Link to='/current'>
+          <button
+            type='button'
+            className='currentButton'
+            style={{ backgroundColor: !canSwipe && disabledButtonColor }}
+          >
+            see your current chores
+          </button>
+        </Link>
+      </div>
     </div>
   )
 }
