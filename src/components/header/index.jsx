@@ -7,7 +7,7 @@ import './style.css'
 import logo from '../../assets/templateMascot.png'
 
 export default function Header() {
-  const token = useSelector(selectCurrentToken)
+  const token = useSelector(selectCurrentToken) || localStorage.getItem('token')
 
   return (
     <div className='header'>

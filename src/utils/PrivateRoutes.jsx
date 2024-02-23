@@ -4,9 +4,9 @@ import { useEffect } from 'react'
 import { selectCurrentToken } from '../features/auth/authSlice'
 
 function PrivateRoutes() {
-  const token = useSelector(selectCurrentToken)
+  const token = useSelector(selectCurrentToken) || localStorage.getItem('token')
 
-  return token || localStorage.getItem('token') ? <Outlet /> : <Navigate to='/login' />
+  return token ? <Outlet /> : <Navigate to='/login' />
 }
 
 export default PrivateRoutes
