@@ -4,10 +4,12 @@ import TinderCard from 'react-tinder-card'
 import './style.css'
 import { Link } from 'react-router-dom'
 import { goBack, swiped, outOfFrame, updateApprovedChores } from '../../features/chores/choresSlice'
+import { fetchTasks } from '../../features/chores/taskApi'
 
 export default function Deck() {
   const dispatch = useDispatch()
   const { tasks, currentIndex, lastDirection } = useSelector((state) => state.chores)
+  const storedApprovedChores = JSON.parse(localStorage.getItem('approvedChores'))
 
   const canSwipe = currentIndex >= 0 && currentIndex < tasks.length
   const canGoBack = currentIndex < tasks.length - 1
@@ -39,6 +41,7 @@ export default function Deck() {
   useEffect(() => {
     const storedApprovedChores = JSON.parse(localStorage.getItem('approvedChores')) || []
     dispatch(updateApprovedChores(storedApprovedChores))
+    dispatch(fetchTasks())
   }, [dispatch])
 
   return (
@@ -55,7 +58,7 @@ export default function Deck() {
               onCardLeftScreen={() => dispatch(outOfFrame(task.id, index))}
             >
               <div style={{ backgroundImage: `url(${task.imageUrl})` }} className='card'>
-                <h3>{task.name}</h3>
+                <h3 style={{ color: 'red' }}>{task.name}</h3>
               </div>
             </TinderCard>
           ))}
@@ -85,15 +88,17 @@ export default function Deck() {
         </div>
         {lastDirection ? <div /> : <h2 className='infoText'>Swipe a card to get your Chores!</h2>}
         <div className='buttons'>
-          <Link to='/tasks'>
-            <button
-              type='button'
-              className='currentButton'
-              style={{ backgroundColor: !canSwipe && disabledButtonColor }}
-            >
-              see your current chores
-            </button>
-          </Link>
+          {storedApprovedChores && (
+            <Link to='/tasks'>
+              <button
+                type='button'
+                className='currentButton'
+                style={{ backgroundColor: !canSwipe && disabledButtonColor }}
+              >
+                see your current chores
+              </button>
+            </Link>
+          )}
         </div>
       </div>
     </div>

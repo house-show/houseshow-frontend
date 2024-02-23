@@ -8,18 +8,16 @@ import { fetchTasks } from '../../features/chores/taskApi'
 export default function Welcome() {
   const dispatch = useDispatch()
   const tasks = useSelector((state) => state.chores.tasks)
-  const token = useSelector(selectCurrentToken)
 
   useEffect(() => {
-    if (token) {
-      dispatch(fetchTasks())
-    }
-  }, [dispatch, token])
+    dispatch(fetchTasks())
+  }, [dispatch])
 
   return (
     <div className='body'>
       <div className='welcome'>
         <h1>Welcome houseShow!</h1>
+
         <ul>
           {tasks.map((task) => (
             <li key={task.id}>{task.name}</li>

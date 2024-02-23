@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { useNavigate } from 'react-router'
 
 const authSlice = createSlice({
   name: 'auth',
@@ -28,9 +29,12 @@ const authSlice = createSlice({
       if (state.isExpired) {
         state.token = null
         localStorage.removeItem('token')
+
         // eslint-disable-next-line no-console
         console.log('Token is expired Please sign_in again, remainingSeconds')
       }
+      // eslint-disable-next-line no-console
+      console.log('remaining time', remainingSeconds)
     }
   }
 })

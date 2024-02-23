@@ -14,11 +14,11 @@ html {
 }
 
 .ant-btn-primary {
-  background-color: rgb(250, 230, 200);
-  color: gray;
+  background: linear-gradient(144deg, #ba89ff, #00ddeb 120%);
+  color: #fff;
 }
 
 .ant-btn-primary:not(:disabled):not(.ant-btn-disabled):hover {
+  background: linear-gradient(144deg, #ba89ff, #00ddeb 120%);
   color: #fff;
-  background: rgb(255, 211, 144);
 }
