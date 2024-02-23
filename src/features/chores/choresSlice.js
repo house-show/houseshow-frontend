@@ -1,40 +1,18 @@
 import React from 'react'
 import { createSlice } from '@reduxjs/toolkit'
+import { fetchTasks } from './taskApi'
 
-const initialChores = [
-  {
-    name: 'Dishes',
-    url: 'https://images.unsplash.com/photo-1581622558663-b2e33377dfb2?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-  },
-  {
-    name: 'Ironing',
-    url: 'https://images.unsplash.com/photo-1604762434310-c6def6a3d844?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-  },
-  {
-    name: 'Clean Up',
-    url: 'https://images.unsplash.com/photo-1550963295-019d8a8a61c5?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-  },
-  {
-    name: 'Laundry',
-    url: 'https://plus.unsplash.com/premium_photo-1664372899525-d99a419fd21a?q=80&w=1594&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-  },
-  {
-    name: 'Dinner',
-    url: 'https://images.unsplash.com/photo-1549716679-efce92a6bd12?q=80&w=1602&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-  }
-]
-const initialState = {
-  db: initialChores,
-  currentIndex: initialChores.length - 1,
-  lastDirection: null,
-  childRefs: Array(initialChores.length)
-    .fill(0)
-    .map(() => React.createRef()),
-  approvedChores: []
-}
 const choresSlice = createSlice({
   name: 'chores',
-  initialState,
+  initialState: {
+    tasks: [],
+    isLoading: false,
+    error: null,
+    currentIndex: -1,
+    lastDirection: null,
+    childRefs: [],
+    approvedChores: []
+  },
   reducers: {
     updateCurrentIndex: (state, action) => {
       const val = action.payload
@@ -51,8 +29,8 @@ const choresSlice = createSlice({
         approvedChores: [...state.approvedChores]
       }
 
-      if (direction === 'right' && index >= 0 && index < state.db.length) {
-        const approvedChore = state.db[index]
+      if (direction === 'right' && index >= 0 && index < state.tasks.length) {
+        const approvedChore = state.tasks[index]
         newState.approvedChores.push(approvedChore)
 
         localStorage.setItem('approvedChores', JSON.stringify(newState.approvedChores))
@@ -72,12 +50,12 @@ const choresSlice = createSlice({
     swipe: async (state, action) => {
       const dir = action.payload
       const canSwipe = state.currentIndex >= 0
-      if (canSwipe && state.currentIndex < state.db.length) {
+      if (canSwipe && state.currentIndex < state.tasks.length) {
         await state.childRefs[state.currentIndex].current.swipe(dir)
       }
     },
     goBack: (state) => {
-      const canGoBack = state.currentIndex < state.db.length - 1
+      const canGoBack = state.currentIndex < state.tasks.length - 1
       if (!canGoBack) return state
 
       const newIndex = state.currentIndex + 1
@@ -114,6 +92,24 @@ const choresSlice = createSlice({
 
       return newState
     }
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchTasks.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(fetchTasks.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.tasks = action.payload
+        state.currentIndex = action.payload.length - 1
+        state.childRefs = Array(action.payload.length)
+          .fill(0)
+          .map(() => React.createRef())
+      })
+      .addCase(fetchTasks.rejected, (state, action) => {
+        state.isLoading = false
+        state.error = action.payload
+      })
   }
 })
 

@@ -24,7 +24,6 @@
   overflow: hidden;
 }
 
-/* position was absolute, changed to fixed due to overflow problems */
 .swipe {
   position: fixed;
 }
@@ -47,9 +46,6 @@
   border-radius: 20px;
   background-size: cover;
   background-position: center;
-}
-
-.swipe:last-of-type {
 }
 
 .card h3 {

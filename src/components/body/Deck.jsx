@@ -7,19 +7,19 @@ import { goBack, swiped, outOfFrame, updateApprovedChores } from '../../features
 
 export default function Deck() {
   const dispatch = useDispatch()
-  const { db, currentIndex, lastDirection } = useSelector((state) => state.chores)
+  const { tasks, currentIndex, lastDirection } = useSelector((state) => state.chores)
 
-  const canSwipe = currentIndex >= 0 && currentIndex < db.length
-  const canGoBack = currentIndex < db.length - 1
+  const canSwipe = currentIndex >= 0 && currentIndex < tasks.length
+  const canGoBack = currentIndex < tasks.length - 1
   const disabledButtonColor = '#c3c4d3'
   const btColor = '#a9a9a9'
 
   const childRefs = useMemo(
     () =>
-      Array(db.length)
+      Array(tasks.length)
         .fill(0)
         .map(() => React.createRef()),
-    [db.length]
+    [tasks.length]
   )
 
   const handleSwipe = async (dir) => {
@@ -42,59 +42,59 @@ export default function Deck() {
   }, [dispatch])
 
   return (
-    <div className='deck'>
-      <div className='cardContainer'>
-        {db.map((character, index) => (
-          <TinderCard
-            ref={childRefs[index]}
-            className='swipe'
-            key={character.name}
-            preventSwipe={['up', 'down']}
-            onSwipe={(dir) =>
-              dispatch(swiped({ direction: dir, nameToDelete: character.name, index }))
-            }
-            onCardLeftScreen={() => dispatch(outOfFrame(character.name, index))}
-          >
-            <div style={{ backgroundImage: `url(${character.url})` }} className='card'>
-              <h3>{character.name}</h3>
-            </div>
-          </TinderCard>
-        ))}
-      </div>
-      <div className='buttons'>
-        <button
-          type='button'
-          style={{ backgroundColor: !canSwipe && disabledButtonColor }}
-          onClick={() => handleSwipe('left')}
-        >
-          Swipe left!
-        </button>
-        <button
-          type='button'
-          style={{ backgroundColor: !canGoBack && disabledButtonColor }}
-          onClick={handleGoBack}
-        >
-          Undo swipe!
-        </button>
-        <button
-          type='button'
-          style={{ backgroundColor: !canSwipe && disabledButtonColor }}
-          onClick={() => handleSwipe('right')}
-        >
-          Swipe right!
-        </button>
-      </div>
-      {lastDirection ? <div /> : <h2 className='infoText'>Swipe a card to get your Chores!</h2>}
-      <div className='buttons'>
-        <Link to='/current'>
+    <div className='body'>
+      <div className='deck'>
+        <div className='cardContainer'>
+          {tasks.map((task, index) => (
+            <TinderCard
+              ref={childRefs[index]}
+              className='swipe'
+              key={task.id}
+              preventSwipe={['up', 'down']}
+              onSwipe={(dir) => dispatch(swiped({ direction: dir, nameToDelete: task.id, index }))}
+              onCardLeftScreen={() => dispatch(outOfFrame(task.id, index))}
+            >
+              <div style={{ backgroundImage: `url(${task.imageUrl})` }} className='card'>
+                <h3>{task.name}</h3>
+              </div>
+            </TinderCard>
+          ))}
+        </div>
+        <div className='buttons'>
           <button
             type='button'
-            className='currentButton'
             style={{ backgroundColor: !canSwipe && disabledButtonColor }}
+            onClick={() => handleSwipe('left')}
           >
-            see your current chores
+            Swipe left!
           </button>
-        </Link>
+          <button
+            type='button'
+            style={{ backgroundColor: !canGoBack && disabledButtonColor }}
+            onClick={handleGoBack}
+          >
+            Undo swipe!
+          </button>
+          <button
+            type='button'
+            style={{ backgroundColor: !canSwipe && disabledButtonColor }}
+            onClick={() => handleSwipe('right')}
+          >
+            Swipe right!
+          </button>
+        </div>
+        {lastDirection ? <div /> : <h2 className='infoText'>Swipe a card to get your Chores!</h2>}
+        <div className='buttons'>
+          <Link to='/tasks'>
+            <button
+              type='button'
+              className='currentButton'
+              style={{ backgroundColor: !canSwipe && disabledButtonColor }}
+            >
+              see your current chores
+            </button>
+          </Link>
+        </div>
       </div>
     </div>
   )
