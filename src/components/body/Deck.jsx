@@ -45,7 +45,7 @@ export default function Deck() {
   }, [dispatch])
 
   return (
-    <div className='body'>
+    <div className='swipeBody'>
       <div className='deck'>
         <div className='cardContainer'>
           {tasks.map((task, index) => (
@@ -89,15 +89,13 @@ export default function Deck() {
         {lastDirection ? <div /> : <h2 className='infoText'>Swipe a card to get your Chores!</h2>}
         <div className='buttons'>
           {storedApprovedChores && (
-            <Link to='/tasks'>
-              <button
-                type='button'
-                className='currentButton'
-                style={{ backgroundColor: !canSwipe && disabledButtonColor }}
-              >
-                see your current chores
-              </button>
-            </Link>
+            <button
+              type='button'
+              className='currentButton'
+              style={{ backgroundColor: !canSwipe && disabledButtonColor }}
+            >
+              <Link to='/tasks'>see your current chores</Link>
+            </button>
           )}
         </div>
       </div>

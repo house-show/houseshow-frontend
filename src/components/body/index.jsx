@@ -1,7 +1,5 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import { selectCurrentToken } from '../../features/auth/authSlice'
 import Deck from './Deck'
 import './style.css'
 import Login from './Login'
@@ -10,8 +8,6 @@ import Tasks from './Tasks'
 import PrivateRoutes from '../../utils/PrivateRoutes'
 
 export default function Body() {
-  const token = useSelector(selectCurrentToken)
-
   return (
     <Routes>
       <Route element={<PrivateRoutes />}>

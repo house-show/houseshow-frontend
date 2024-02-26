@@ -3,8 +3,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  width: 95vw;
-  height: 40rem;
+  min-width: 20rem;
+  height: 25rem;
+  overflow: auto;
   max-height: 90%;
 }
 .approvedChores {
@@ -12,12 +13,11 @@
   flex-direction: column;
   width: 100%;
   overflow: auto;
-  height: 90%;
 }
 
 .approvedChoresCard {
   border-radius: 1rem;
-  margin-top: 0.5rem;
+  margin: 0.5rem;
   width: 95%;
   background: linear-gradient(90deg, rgba(236, 236, 236, 1) 0%, rgb(250, 230, 200) 100%);
   box-shadow: 3px 3px 3px darkgray;

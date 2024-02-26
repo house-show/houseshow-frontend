@@ -1,37 +1,24 @@
-import React, { useEffect } from 'react'
+import React, { useState } from 'react'
 import './style.css'
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import { Button } from 'antd'
-import { HeartOutlined, HomeOutlined, UserOutlined } from '@ant-design/icons'
-import { selectExpirationStatus } from '../../features/auth/authSlice'
+import homeGif from '../../assets/home.gif'
+import home from '../../assets/homeFrame.gif'
 
 export default function Footer() {
-  const isTokenExpired = useSelector(selectExpirationStatus)
-  const btColor = '#a9a9a9'
+  const [isAnimating, setIsAnimating] = useState(false)
+
+  const handleClick = () => {
+    setIsAnimating(true)
+    setTimeout(() => {
+      setIsAnimating(false)
+    }, 2400)
+  }
 
   return (
     <div className='footer'>
-      <div className='footerHomeButton'>
-        <Link className='footer-buttons' to='/'>
-          <Button type='text' size='large' style={{ color: btColor }} icon={<HomeOutlined />} />
-        </Link>
-      </div>
-      {!isTokenExpired ? (
-        <div className='protectedButtons'>
-          <Link className='footer-buttons' to='/deck'>
-            <Button type='text' size='large' style={{ color: btColor }} icon={<HeartOutlined />} />
-            chores
-          </Link>
-
-          <Link className='footer-buttons' to='/login'>
-            <Button type='text' size='large' style={{ color: btColor }} icon={<UserOutlined />} />
-            profile
-          </Link>
-        </div>
-      ) : (
-        <> </>
-      )}
+      <Link className='footerHomeButton' to='/' type='button' onClick={handleClick}>
+        <img className='homeLogoImg' src={isAnimating ? homeGif : home} alt='menu' />
+      </Link>
     </div>
   )
 }

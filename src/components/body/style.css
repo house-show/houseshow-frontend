@@ -1,18 +1,58 @@
 .body {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 83vh;
+  width: 100vw;
+  overflow: auto;
+}
+
+.swipeBody {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   height: 83vh;
   width: 100vw;
   max-width: 100%;
 }
-.welcome {
+.wlcCard {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  height: 83vh;
-  width: 100vw;
-  max-width: 100%;
-  overflow: auto;
+  width: 75%;
+  border: 1px solid red;
+  margin: 0.5rem 1rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.145);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(3.8px);
+  -webkit-backdrop-filter: blur(3.8px);
+  border: 1px solid rgba(255, 255, 255, 0.19);
+  text-decoration: none;
+  cursor: pointer;
+  color: rgb(60, 60, 60);
+}
+.wlcCardRow {
+  display: flex;
+  flex-direction: row;
+  height: 30%;
+  width: 90%;
+}
+
+.welcomeImg {
+  display: flex;
+  align-self: center;
+  width: 75vw;
+  border-radius: 10%;
+}
+
+.welcomeMsg {
+  position: relative;
+  top: -45vw;
+  color: wheat;
+  font-size: 40px;
+  background-color: #9198e5ab;
+  overflow: hidden;
 }
 
 .deck {
@@ -34,6 +74,7 @@
   margin-top: 2rem;
   max-width: 20rem;
   height: 25rem;
+  background-color: red;
 }
 
 .card {
@@ -72,12 +113,6 @@
   justify-content: center;
 }
 
-@media (max-width: 625px) {
-  .buttons {
-    flex-direction: row;
-  }
-}
-
 .buttons button {
   flex-shrink: 0;
   padding: 5px;
@@ -98,7 +133,15 @@
   transform: scale(1.05);
 }
 
-/* text animation*/
+.buttons .currentButton {
+  display: flex;
+  width: 180px;
+}
+.buttons .currentButton a {
+  text-decoration: none;
+  color: #fff;
+}
+
 @keyframes popup {
   0% {
     transform: scale(1, 1);
@@ -123,6 +166,28 @@
   }
 }
 
-.buttons .currentButton {
-  width: 180px;
+@media (max-width: 625px) {
+  .buttons {
+    flex-direction: row;
+  }
+}
+@media (max-height: 800px) {
+  .card {
+    max-width: 180px;
+    height: 18rem;
+  }
+  .buttons {
+    position: absolute;
+    margin-top: 50vh;
+  }
+  .buttons button {
+    display: none;
+  }
+  .buttons .currentButton {
+    display: flex;
+    margin-top: 100px;
+  }
+  .infoText {
+    display: none;
+  }
 }

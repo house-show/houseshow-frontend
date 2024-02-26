@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Card, Input, message } from 'antd'
 import { useDispatch, useSelector } from 'react-redux'
-import { Navigate, useNavigate } from 'react-router'
+import { useNavigate } from 'react-router'
 import { signinUser, signupUser } from '../../features/auth/authApi'
 import {
   selectCurrentToken,
@@ -105,12 +105,14 @@ export default function Login() {
                 onClick={() => setPasswordClicked(true)}
                 onBlur={() => setPasswordClicked(false)}
               />
-              <Button type='primary' onClick={handleSignIn}>
-                Sign In
-              </Button>
-              <Button type='primary' onClick={handleSignUp}>
-                Sign Up
-              </Button>
+              <div className='loginButtons'>
+                <Button type='primary' onClick={handleSignIn}>
+                  Sign In
+                </Button>
+                <Button type='primary' onClick={handleSignUp}>
+                  Sign Up
+                </Button>
+              </div>
             </>
           )}
         </Card>

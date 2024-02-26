@@ -61,9 +61,9 @@ export default function TaskCard() {
             </Card>
           ))}
 
-          <button className='buttonRemove' type='button' onClick={handleRemoveAllApprovedChores}>
+          <Button type='primary' onClick={handleRemoveAllApprovedChores}>
             Remove All Approved Chores
-          </button>
+          </Button>
         </>
       )}
     </div>

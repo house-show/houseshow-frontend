@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { useNavigate } from 'react-router'
 
 const authSlice = createSlice({
   name: 'auth',
