@@ -22,6 +22,7 @@ export default function Login() {
   const token = useSelector(selectCurrentToken)
   const isExpired = useSelector(selectExpirationStatus)
 
+  console.log(isExpired)
   const getUsernameFromEmail = (email) => email.split('@')[0]
 
   useEffect(() => {

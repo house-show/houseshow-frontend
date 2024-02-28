@@ -13,7 +13,6 @@ html {
 }
 
 .ant-btn-primary {
-  width: 80%;
   align-self: center;
   background: linear-gradient(144deg, #ba89ff, #00ddeb 120%);
   color: #fff;

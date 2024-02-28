@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
+
+import PrivateRoutes from '../../utils/PrivateRoutes'
 import Deck from './Deck'
-import './style.css'
 import Login from './Login'
 import Welcome from './Welcome'
 import Tasks from './Tasks'
-import PrivateRoutes from '../../utils/PrivateRoutes'
+import './style.css'
 
 export default function Body() {
   return (

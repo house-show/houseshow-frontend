@@ -69,3 +69,28 @@ export const signinUser = createAsyncThunk(
     }
   }
 )
+
+// export const checkTokenExpiration = () => async (dispatch, getState) => {
+//   try {
+//     const token = useSelector(selectCurrentToken)
+
+//     if (!token) {
+//       // If token does not exist, no need to check expiration
+//       return
+//     }
+
+//     const tokenExpirationTime = token.iat * 1000 + (token.exp - token.iat) * 1000
+//     const currentTime = Date.now()
+//     console.log(tokenExpirationTime)
+
+//     if (tokenExpirationTime < currentTime) {
+//       // Token is expired
+//       dispatch(logOut())
+//     } else {
+//       // Token is not expired
+//       dispatch(setExpirationStatus({ isExpired: false }))
+//     }
+//   } catch (error) {
+//     console.error('Error checking token expiration:', error)
+//   }
+// }

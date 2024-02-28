@@ -20,8 +20,9 @@ export default function Welcome() {
 
     const randomizeImage = () => {
       const images = [wlc1, wlc2, wlc3, wlc4]
-      const randomIndex = Math.floor(Math.random() * images.length)
-      setRandomImage(images[randomIndex])
+      const remainingImages = images.filter((image) => image !== randomImage)
+      const randomIndex = Math.floor(Math.random() * remainingImages.length)
+      setRandomImage(remainingImages[randomIndex])
     }
 
     randomizeImage()
@@ -29,9 +30,9 @@ export default function Welcome() {
 
   return (
     <div className='body'>
-      <div className='wlcCard'>
-        <img className='welcomeImg' alt='welcomeBackground' src={randomImage} />
+      <div className='wlcCard' style={{ backgroundImage: `url(${randomImage})` }}>
         <h1 className='welcomeMsg'>Welcome houseShow!</h1>
+        <h3 className='welcomeMsgSec'>Welcome User lets do stuff bla bla</h3>
       </div>
       <div className='wlcCardRow'>
         <div className='wlcCard' to='/deck'>
@@ -50,7 +51,7 @@ export default function Welcome() {
           <h6>in progress-not private</h6>
         </div>
       </div>
-      <div to='/tasks' className='wlcCard'>
+      <div to='/tasks' className='wlcCardTasks'>
         <Button type='primary'>
           <Link to='/tasks'>Today&apos;s Tasks</Link>
         </Button>

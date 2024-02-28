@@ -35,7 +35,6 @@ export default function TaskCard() {
     <div className='approvedChores'>
       {storedApprovedChores && (
         <>
-          <h4 className='choresText'>My Tasks</h4>
           {approvedChores.map((chore, index) => (
             <Card
               className={`approvedChoresCard ${clickedCard === index ? 'selected' : ''}`}

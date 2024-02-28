@@ -2,7 +2,12 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const authSlice = createSlice({
   name: 'auth',
-  initialState: { user: null, token: null, isExpired: null, loading: false },
+  initialState: {
+    user: null,
+    token: null,
+    isExpired: null,
+    loading: false
+  },
   reducers: {
     setCredentials: (state, action) => {
       const { user, accessToken } = action.payload
@@ -16,24 +21,24 @@ const authSlice = createSlice({
       localStorage.removeItem('token')
     },
     setExpirationStatus: (state, action) => {
-      const { exp, iat } = action.payload
+      const { exp, iat, accessToken } = action.payload
       const now = Date.now()
       const expirationTime = iat * 1000 + (exp - iat) * 1000
 
       const remainingTime = expirationTime - now
-      const remainingSeconds = Math.floor(remainingTime / 1000)
+      const remainingSeconds = Math.floor(remainingTime / 1000) - 895 // Subtracting 895 seconds
 
-      state.isExpired = now >= expirationTime
-
-      if (state.isExpired) {
+      if (remainingSeconds < 0) {
+        state.isExpired = true
         state.token = null
         localStorage.removeItem('token')
-
-        // eslint-disable-next-line no-console
-        console.log('Token is expired Please sign_in again, remainingSeconds')
+        console.log('belowzero')
+      } else {
+        state.isExpired = false
+        console.log('upper zero')
       }
-      // eslint-disable-next-line no-console
-      console.log('remaining time', remainingSeconds)
+
+      console.log('remaining seconds', remainingSeconds)
     }
   }
 })

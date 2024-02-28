@@ -2,16 +2,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  margin-top: 5rem;
+  margin-bottom: 15vh;
   min-width: 20rem;
-  height: 25rem;
+  width: 100vw;
   overflow: auto;
-  max-height: 90%;
 }
 .approvedChores {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 80%;
   overflow: auto;
 }
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import './style.css'
 import { Link } from 'react-router-dom'
+import './style.css'
 import homeGif from '../../assets/home.gif'
 import home from '../../assets/homeFrame.gif'
 

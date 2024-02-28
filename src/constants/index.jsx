@@ -10,5 +10,6 @@ export const API_SUCCESS = {
 
 export const TASK_ERROR = {
   failed: 'Failed to fetch tasks. Please try again.',
-  default: 'An error occured while fetching data. Please try again.'
+  default: 'An error occured while fetching data. Please try again.',
+  tokenExpired: 'Your session has expired. Please sign in again.'
 }
