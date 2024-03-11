@@ -1,11 +1,24 @@
 html {
   font-family: 'Open Sans', Helvetica, arial, sans-serif;
-  background: linear-gradient(to bottom, #8b5fad, #34495e);
+  background: linear-gradient(180deg, rgb(195, 226, 255) 0%, rgb(186, 133, 255) 100%);
+  overflow: hidden;
+  width: 100vw;
 }
 
 .App {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  width: 100vw;
+  max-width: 100%;
+}
+
+.ant-btn-primary {
+  align-self: center;
+  background: linear-gradient(144deg, #ba89ff, #00ddeb 120%);
+  color: #fff;
+}
+
+.ant-btn-primary:not(:disabled):not(.ant-btn-disabled):hover {
+  background: linear-gradient(144deg, #ba89ff, #00ddeb 120%);
+  color: #fff;
 }

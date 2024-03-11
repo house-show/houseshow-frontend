@@ -1,6 +1,226 @@
 .body {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   height: 83vh;
   width: 100vw;
   overflow: auto;
+  margin-top: 10vh;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.swipeBody {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 83vh;
+  width: 100vw;
+  margin-top: 010vh;
+  max-width: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+.wlcCard {
+  display: flex;
+  flex-direction: column;
+  width: 78%;
+  margin: 1rem 1rem;
+  padding: 0.5rem;
+  color: rgb(60, 60, 60);
+  text-decoration: none;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.19);
+  border-radius: 16px;
+  backdrop-filter: blur(3.8px);
+  -webkit-backdrop-filter: blur(3.8px);
+  background: rgba(255, 255, 255, 0.145);
+  background-size: cover;
+  background-position: center;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.welcomeMsg {
+  display: flex;
+  width: 100%;
+  padding: 1rem 0rem 1rem 0.5rem;
+  color: wheat;
+  font-size: 40px;
+  background-color: #9198e5ab;
+  overflow: hidden;
+}
+
+.welcomeMsgSec {
+  color: wheat;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+  font-size: 20px;
+}
+
+.wlcCardRow {
+  display: flex;
+  flex-direction: row;
+  max-height: 30vh;
+  width: 90%;
+}
+
+.wlcCardTasks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80vw;
+  height: 100vh;
+  margin: 1rem 0rem 5rem 0rem;
+  padding: 2rem 0rem;
+  text-decoration: none;
+  color: rgb(60, 60, 60);
+  border: 1px solid rgba(255, 255, 255, 0.19);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.145);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(3.8px);
+  -webkit-backdrop-filter: blur(3.8px);
+  background-size: cover;
+  background-position: center;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.wlcCardTasks .ant-btn-primary {
+  margin-bottom: -4rem;
+  margin-top: 1rem;
+  background-color: red;
+}
+
+.deck {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.swipe {
+  position: fixed;
+}
+
+.cardContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  max-width: 20rem;
+  height: 25rem;
+  background-color: red;
+}
+
+.card {
+  position: relative;
+  background-color: #fff;
+  width: 80vw;
+  max-width: 260px;
+  height: 25rem;
+  box-shadow: 0px 0px 50px 0px rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  background-size: cover;
+  background-position: center;
+}
+
+.card h3 {
+  position: absolute;
+  bottom: 0;
+  margin: 10px;
+  color: #fff;
+}
+
+.infoText {
+  width: 60vw;
+  justify-content: center;
+  display: flex;
+  color: #fff;
+  animation-name: popup;
+  animation-duration: 800ms;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  margin-top: 1rem;
+  width: 60vw;
+  justify-content: center;
+}
+
+.buttons button {
+  flex-shrink: 0;
+  padding: 5px;
+  border-radius: 10px;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  background-color: #9198e5;
+  transition: 200ms;
+  margin: 10px;
+  font-weight: bolder;
+  width: 80px;
+  height: 50px;
+  box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.1);
+}
+
+.buttons button:hover {
+  transform: scale(1.05);
+}
+
+.buttons .currentButton {
+  display: flex;
+  width: 180px;
+}
+.buttons .currentButton a {
+  text-decoration: none;
+  color: #fff;
+}
+
+@keyframes popup {
+  0% {
+    transform: scale(1, 1);
+  }
+  10% {
+    transform: scale(1.1, 1.1);
+  }
+  30% {
+    transform: scale(0.9, 0.9);
+  }
+  50% {
+    transform: scale(1, 1);
+  }
+  57% {
+    transform: scale(1, 1);
+  }
+  64% {
+    transform: scale(1, 1);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+@media (max-width: 625px) {
+  .buttons {
+    flex-direction: row;
+  }
+}
+@media (max-height: 800px) {
+  .card {
+    max-width: 180px;
+    height: 18rem;
+  }
+  .buttons {
+    position: absolute;
+    margin-top: 50vh;
+  }
+  .buttons button {
+    display: none;
+  }
+  .buttons .currentButton {
+    display: flex;
+    margin-top: 100px;
+  }
+  .infoText {
+    display: none;
+  }
 }

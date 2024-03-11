@@ -1,0 +1,66 @@
+.loginContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  height: 40vh;
+}
+.loginButtons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  gap: 1rem;
+}
+@keyframes ghostAnimation {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(25px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.mascotContainer {
+  position: relative;
+  animation: ghostAnimation 6s ease-in-out infinite;
+}
+
+.loginImg {
+  position: relative;
+  height: 300px;
+  margin-top: 10rem;
+}
+
+.eye {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.2s ease;
+  z-index: 1;
+}
+
+.left-eye {
+  scale: 0.5;
+  top: 305px;
+  left: 116px;
+}
+
+.right-eye {
+  scale: 0.5;
+  top: 305px;
+  left: 167px;
+}
+
+.input-clicked {
+  transform: translateY(7px) translateX(-3px) scaleX(0.4) scaleY(0.6);
+}
+
+.password-clicked {
+  transform: translateY(-9px) translateX(4px) scaleX(0.6) scaleY(0.4);
+}

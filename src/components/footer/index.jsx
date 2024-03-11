@@ -1,12 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import './style.css'
+import homeGif from '../../assets/home.gif'
+import home from '../../assets/homeFrame.gif'
 
 export default function Footer() {
+  const [isAnimating, setIsAnimating] = useState(false)
+
+  const handleClick = () => {
+    setIsAnimating(true)
+    setTimeout(() => {
+      setIsAnimating(false)
+    }, 2400)
+  }
+
   return (
     <div className='footer'>
-      <div>footer</div>
-      footer stuff
-      <div>footer</div>
+      <Link className='footerHomeButton' to='/' type='button' onClick={handleClick}>
+        <img className='homeLogoImg' src={isAnimating ? homeGif : home} alt='menu' />
+      </Link>
     </div>
   )
 }
