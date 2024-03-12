@@ -26,7 +26,7 @@ const authSlice = createSlice({
       const expirationTime = iat * 1000 + (exp - iat) * 1000
 
       const remainingTime = expirationTime - now
-      const remainingSeconds = Math.floor(remainingTime / 1000) - 895 // Subtracting 895 seconds
+      const remainingSeconds = Math.floor(remainingTime / 1000) // - 895  Subtracting 895 seconds
 
       if (remainingSeconds < 0) {
         state.isExpired = true

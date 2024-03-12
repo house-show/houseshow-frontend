@@ -30,6 +30,9 @@ export default function Header() {
 
   return (
     <div className='headerContents'>
+      <Link to='/'>
+        <h2>Cup Score</h2>
+      </Link>
       <button
         className='menu-icon'
         type='button'
@@ -43,17 +46,23 @@ export default function Header() {
         <ul className='menu-list'>
           {token ? (
             <>
-              <Button type='primary' onClick={handleToggle}>
-                <Link to='/login'>Profile</Link>
-              </Button>
-              <Button type='primary' onClick={handleToggle}>
-                <Link to='/deck'>to Deck</Link>
-              </Button>
+              <Link to='/login'>
+                <Button type='primary' onClick={handleToggle}>
+                  Profile
+                </Button>
+              </Link>
+              <Link to='/deck'>
+                <Button type='primary' onClick={handleToggle}>
+                  to Cafes
+                </Button>
+              </Link>
             </>
           ) : (
-            <Button type='primary' onClick={handleToggle}>
-              <Link to='/login'>Sign In</Link>
-            </Button>
+            <Link to='/login'>
+              <Button type='primary' onClick={handleToggle}>
+                Sign In
+              </Button>
+            </Link>
           )}
         </ul>
       </div>

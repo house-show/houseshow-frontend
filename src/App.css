@@ -12,6 +12,15 @@ html {
   max-width: 100%;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
 .ant-btn-primary {
   align-self: center;
   background: linear-gradient(144deg, #ba89ff, #00ddeb 120%);
@@ -19,6 +28,16 @@ html {
 }
 
 .ant-btn-primary:not(:disabled):not(.ant-btn-disabled):hover {
+  background: linear-gradient(144deg, #ba89ff, #00ddeb 120%);
+  color: #fff;
+}
+.ant-btn-secondary {
+  align-self: center;
+  background: linear-gradient(144deg, #cebfe2, #c9fbff 120%);
+  color: #fff;
+}
+
+.ant-btn-secondary:not(:disabled):not(.ant-btn-disabled):hover {
   background: linear-gradient(144deg, #ba89ff, #00ddeb 120%);
   color: #fff;
 }
